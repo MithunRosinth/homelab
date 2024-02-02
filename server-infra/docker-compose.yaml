@@ -2,8 +2,6 @@ services:
   nginx:
     image: lscr.io/linuxserver/nginx:latest
     container_name: nginx
-    networks:
-      - media-server_default
     environment:
       - PUID=1000
       - PGID=1000
