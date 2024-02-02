@@ -14,3 +14,8 @@ services:
       - 80:80
       - 443:443
     restart: unless-stopped
+
+networks:
+  network1:
+    name: media-server_default
+    external: true
