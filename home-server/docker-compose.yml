@@ -84,19 +84,3 @@ services:
     ports:
       - 8096:8096
     restart: unless-stopped
-
-###### NGINX ######
-
-  nginx:
-      image: lscr.io/linuxserver/nginx:latest
-      container_name: nginx
-      environment:
-        - PUID=1000
-        - PGID=1000
-        - TZ=Asia/Dubai
-      volumes:
-        - ${CONFIGS}nginx:/config
-      ports:
-        - 80:80
-        - 443:443
-      restart: unless-stopped
