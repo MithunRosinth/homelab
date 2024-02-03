@@ -91,7 +91,6 @@ services:
     container_name: nginxproxymanager
     restart: unless-stopped 
     ports:
-      - '81:81'
       - '80:80'
       - '443:443' 
     volumes:
