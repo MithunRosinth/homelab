@@ -1,0 +1,16 @@
+services:
+  homarr:
+    container_name: homarr
+    image: ghcr.io/ajnart/homarr:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${CONFIGS}homarr/configs:/app/data/configs
+      - ${CONFIGS}homarr/icons:/app/public/icons
+      - ${CONFIGS}homarr/data:/data
+    networks:
+      - netwrk
+
+networks:
+  netwrk:
+    driver: bridge

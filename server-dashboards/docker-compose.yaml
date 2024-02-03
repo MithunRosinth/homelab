@@ -1,0 +1,40 @@
+services:
+  homarr:
+    container_name: homarr
+    image: ghcr.io/ajnart/homarr:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${CONFIGS}homarr/configs:/app/data/configs
+      - ${CONFIGS}homarr/icons:/app/public/icons
+      - ${CONFIGS}homarr/data:/data
+    networks:
+      - netwrk
+      - server-infra_netwrk
+      - server-media_netwrk
+      - server-helm_netwrk
+      - server-dashboards_ntwrk
+    restart: unless-stopped
+    
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${CONFIGS}portainer:/data
+    ports:
+      - 8000:8000
+    networks:
+      - netwrk
+    restart: unless-stopped
+
+networks:
+  netwrk:
+    driver: bridge
+  server-infra_netwrk:
+      external: true  
+  server-media_netwrk:
+      external: true
+  server-helm_netwrk:
+      external: true
+  server-dashboards_ntwrk:
+      external: true
