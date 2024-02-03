@@ -47,7 +47,7 @@ services:
       - 9696:9696
     restart: unless-stopped
 
-###### QBITTORRENT ######
+###### DELUGE ######
 
   deluge:
     image: lscr.io/linuxserver/deluge:latest
@@ -84,57 +84,16 @@ services:
       - 8096:8096
     restart: unless-stopped
 
-###### READARR ######
+###### NGINX PROXYMANAGER ######
 
-  readarr:
-    image: lscr.io/linuxserver/readarr:develop
-    container_name: readarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Dubai
-    volumes:
-      - ${CONFIGS}readarr:/config
-      - ${DATA}:/data
+  nginxproxymanager:
+    image: 'jc21/nginx-proxy-manager:latest' 
+    container_name: nginxproxymanager
+    restart: unless-stopped 
     ports:
-      - 8787:8787
-    restart: unless-stopped
-
-###### CALIBRE ######
-  
-  calibre:
-    image: lscr.io/linuxserver/calibre:latest
-    container_name: calibre
-    security_opt:
-      - seccomp:unconfined #optional
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Dubai
-      - PASSWORD= #optional
-      - CLI_ARGS= #optional
+      - '80:80'
+      - '81:81'
+      - '443:443' 
     volumes:
-      - ${CONFIGS}calibre:/config
-    ports:
-      - 8081:8080
-      - 8181:8181
-      - 8082:8081
-    restart: unless-stopped
-
-###### CALIBRE-WEB ######
-
-  calibre-web:
-    image: lscr.io/linuxserver/calibre-web:latest
-    container_name: calibre-web
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Dubai
-      - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
-      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
-    volumes:
-      - ${CONFIGS}calibre-web:/config
-      - ${DATA}/books:/books
-    ports:
-      - 8083:8083
-    restart: unless-stopped
+      - ${CONFIGS}nginx/data:/data
+      - ${CONFIGS}nginx/letsencrypt:/etc/letsencrypt 
