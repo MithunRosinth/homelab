@@ -12,8 +12,8 @@ services:
     volumes:
       - ${CONFIGS}sonarr:/config
       - ${DATA}:/data
-    ports:
-      - 8989:8989
+#    ports:
+#      - 8989:8989
     restart: unless-stopped
 
 ###### RADARR ######
@@ -28,8 +28,8 @@ services:
     volumes:
       - ${CONFIGS}radarr:/config
       - ${DATA}:/data
-    ports:
-      - 7878:7878
+#    ports:
+#      - 7878:7878
     restart: unless-stopped
 
 ###### PROWLARR ######
@@ -43,8 +43,8 @@ services:
       - TZ=Asia/Dubai
     volumes:
       - ${CONFIGS}prowlarr:/config
-    ports:
-      - 9696:9696
+#    ports:
+#      - 9696:9696
     restart: unless-stopped
 
 ###### DELUGE ######
@@ -61,7 +61,7 @@ services:
       - ${CONFIGS}deluge:/config
       - ${DOWNLOADS}:/downloads
     ports:
-      - 8112:8112
+#      - 8112:8112
       - 6881:6881
       - 6881:6881/udp
       - 58846:58846 #optional
@@ -80,8 +80,8 @@ services:
       - ${CONFIGS}jellyfin:/config
       - ${DATA}/tv-shows:/data/tvshows
       - ${DATA}/movies:/data/movies
-    ports:
-      - 8096:8096
+#    ports:
+#      - 8096:8096
     restart: unless-stopped
 
 ###### NGINX PROXYMANAGER ######
@@ -92,7 +92,6 @@ services:
     restart: unless-stopped 
     ports:
       - '80:80'
-      - '81:81'
       - '443:443' 
     volumes:
       - ${CONFIGS}nginx/data:/data
