@@ -96,17 +96,3 @@ services:
     volumes:
       - ${CONFIGS}nginx/data:/data
       - ${CONFIGS}nginx/letsencrypt:/etc/letsencrypt 
-  
-###### PORTAINER ######
-
-  portainer:
-    image: portainer/portainer-ee:latest
-    container_name: portainer
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /mnt/c/home-server-configs/portainer_data:/data
-    ports:
-      - 8000:8000
-      - 9443:9443
-      - 9000:9000
-    restart: unless-stopped
