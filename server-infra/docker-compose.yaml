@@ -16,6 +16,7 @@ services:
       - netwrk
       - server-media_netwrk
       - server-helm_netwrk
+      - portainer_ntwrk
 
 networks:
   netwrk:
@@ -23,4 +24,6 @@ networks:
   server-media_netwrk:
       external: true
   server-helm_netwrk:
+      external: true
+  portainer_ntwrk:
       external: true
