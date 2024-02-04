@@ -16,7 +16,7 @@ services:
       - netwrk
       - server-media_netwrk
       - server-helm_netwrk
-      - server-dashboards_ntwrk
+      - server-dashboards_netwrk
 
 networks:
   netwrk:
@@ -25,5 +25,5 @@ networks:
       external: true
   server-helm_netwrk:
       external: true
-  server-dashboards_ntwrk:
+  server-dashboards_netwrk:
       external: true

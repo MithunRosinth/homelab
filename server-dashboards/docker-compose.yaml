@@ -12,19 +12,6 @@ services:
       - server-infra_netwrk
       - server-media_netwrk
       - server-helm_netwrk
-      - server-dashboards_ntwrk
-    restart: unless-stopped
-    
-  portainer:
-    image: portainer/portainer-ce:latest
-    container_name: portainer
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ${CONFIGS}portainer:/data
-    ports:
-      - 8000:8000
-    networks:
-      - netwrk
     restart: unless-stopped
 
 networks:
