@@ -54,26 +54,6 @@ services:
 
 ###### DELUGE ######
 
-  deluge:
-    image: lscr.io/linuxserver/deluge:latest
-    container_name: deluge
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Dubai
-      - DELUGE_LOGLEVEL=error #optional
-    volumes:
-      - ${CONFIGS}deluge:/config
-      - ${DOWNLOADS}:/downloads
-    networks:
-      - netwrk
-    ports:
-#      - 8112:8112
-      - 6881:6881
-      - 6881:6881/udp
-      - 58846:58846 #optional
-    restart: unless-stopped
-
 networks:
   netwrk:
     driver: bridge
