@@ -1,0 +1,34 @@
+services:
+
+  radarr-ts:
+    image: tailscale/tailscale:latest
+    container_name: radarr-ts
+    hostname: radarr
+    environment:
+      - TS_AUTHKEY=value
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_SERVE_CONFIG=/config/server-helm.json
+      - TS_EXTRA_ARGS=--advertise-tags=tag:helm-services
+      - TZ=Asia/Dubai
+    volumes:
+      - ${PWD}/state:/var/lib/tailscale
+      - ${PWD}/config:/config
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+      - sys_module
+
+###### RADARR ######
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Dubai
+    volumes:
+      - ${CONFIGS}radarr:/config
+      - ${DATA}:/data
+    network_mode: service:radarr-ts
+    restart: unless-stopped
