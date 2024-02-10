@@ -1,0 +1,36 @@
+{
+    "TCP": {
+        "443": {
+            "HTTPS": true
+        }
+    },
+    "Web": {
+        "sonarr.platypus-manta.ts.net:443": {
+           "Handlers": {
+            "/": {
+                "Proxy": "http://127.0.0.1:8989"
+            }
+           } 
+        },
+        "radarr.platypus-manta.ts.net:443": {
+            "Handlers": {
+             "/": {
+                 "Proxy": "http://127.0.0.1:7878"
+             }
+            } 
+        },
+        "prowlarr.platypus-manta.ts.net:443": {
+            "Handlers": {
+             "/": {
+                 "Proxy": "http://127.0.0.1:9696"
+             }
+            } 
+        }
+    },
+    "AllowFunnel": {
+        "sonarr.platypus-manta.ts.net:443" : false,
+        "radarr.platypus-manta.ts.net:443" : false,
+        "prowlarr.platypus-manta.ts.net:443": false
+    }
+
+}

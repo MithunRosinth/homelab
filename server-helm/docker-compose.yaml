@@ -1,5 +1,22 @@
 services:
 
+  tail-connect:
+    image: tailscale/tailscale:latest
+    container_name: ts-helm
+    hostname: ts-helm
+    environment:
+      - TS_AUTHKEY=value
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_SERVE_CONFIG=/config/server-helm.json
+      - TZ=Asia/Dubai
+    volumes:
+      - ${CONFIGS}/ts-helm/state:/var/lib/tailscale
+      - ${CONFIGS}/ts-helm/config:/config
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+      - sys_module
+
 ###### SONARR ######
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -11,10 +28,7 @@ services:
     volumes:
       - ${CONFIGS}sonarr:/config
       - ${DATA}:/data
-    networks:
-      - netwrk
-#    ports:
-#      - 8989:8989
+    network_mode: service:ts-helm
     restart: unless-stopped
 
 ###### RADARR ######
@@ -29,10 +43,7 @@ services:
     volumes:
       - ${CONFIGS}radarr:/config
       - ${DATA}:/data
-    networks:
-      - netwrk
-#    ports:
-#      - 7878:7878
+    network_mode: service:ts-helm
     restart: unless-stopped
 
 ###### PROWLARR ######
@@ -46,14 +57,7 @@ services:
       - TZ=Asia/Dubai
     volumes:
       - ${CONFIGS}prowlarr:/config
-    networks:
-      - netwrk
+    network_mode: service:ts-helm
 #    ports:
 #      - 9696:9696
     restart: unless-stopped
-
-###### DELUGE ######
-
-networks:
-  netwrk:
-    driver: bridge
