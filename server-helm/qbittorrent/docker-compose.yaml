@@ -1,63 +1,47 @@
 services:
 
-  ts-helm:
-    image: tailscale/tailscale:latest
-    container_name: ts-helm
-    hostname: ts-helm
+  protonwire:
+    container_name: protonwire
+    image: ghcr.io/tprasadtp/protonwire:latest
+    init: true
+    restart: unless-stopped
     environment:
-      - TS_AUTHKEY=value
-      - TS_STATE_DIR=/var/lib/tailscale
-      - TS_SERVE_CONFIG=/config/server-helm.json
-      - TZ=Asia/Dubai
-    volumes:
-      - ${CONFIGS}ts-helm/state:/var/lib/tailscale
-      - ${CONFIGS}ts-helm/config:/config
-      - /dev/net/tun:/dev/net/tun
+      PROTONVPN_SERVER: "AE#9"
+      DEBUG: "0"
+      KILL_SWITCH: "1"
     cap_add:
-      - net_admin
-      - sys_module
+      - NET_ADMIN
+    sysctls:
+      net.ipv4.conf.all.rp_filter: 2
+      net.ipv6.conf.all.disable_ipv6: 1
+    volumes:
+      - type: tmpfs
+        target: /tmp
+      - type: bind
+        source: private.key
+        target: /etc/protonwire/private-key
+        read_only: true
+    networks:
+      - helm-net
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
 
-###### SONARR ######
-  sonarr:
-    image: lscr.io/linuxserver/sonarr:latest
-    container_name: sonarr
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Asia/Dubai
+      - WEBUI_PORT=8080 
     volumes:
-      - ${CONFIGS}sonarr:/config
-      - ${DATA}:/data
-    network_mode: service:ts-helm
+      - ${CONFIGS}qbittorrent:/config
+      - ${DOWNLOADS}:/downloads
+    network_mode: service:protonwire
     restart: unless-stopped
 
-###### RADARR ######
-
-  radarr:
-    image: lscr.io/linuxserver/radarr:latest
-    container_name: radarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Dubai
-    volumes:
-      - ${CONFIGS}radarr:/config
-      - ${DATA}:/data
-    network_mode: service:ts-helm
-    restart: unless-stopped
-
-###### PROWLARR ######
-
-  prowlarr:
-    image: lscr.io/linuxserver/prowlarr:latest
-    container_name: prowlarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Dubai
-    volumes:
-      - ${CONFIGS}prowlarr:/config
-    network_mode: service:ts-helm
-#    ports:
-#      - 9696:9696
-    restart: unless-stopped
+networks:
+  helm-net:
+    external: true
