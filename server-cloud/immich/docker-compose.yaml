@@ -63,7 +63,7 @@ services:
     #   file: hwaccel.ml.yml
     #   service: cpu # set to one of [armnn, cuda, openvino, openvino-wsl] for accelerated inference - use the `-wsl` version for WSL2 where applicable
     volumes:
-      - /home/kenobi/home-server-configs/immich_model_cache:/cache
+      - /mnt/cloud-server-data/immich/immich_model_cache:/cache
     env_file:
       - .env
     restart: always
