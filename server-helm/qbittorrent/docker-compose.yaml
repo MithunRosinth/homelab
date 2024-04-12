@@ -18,7 +18,7 @@ services:
       - type: tmpfs
         target: /tmp
       - type: bind
-        source: private.key
+        source: /home/vvmr-admin/homelab/server-helm/qbittorrent/private.key
         target: /etc/protonwire/private-key
         read_only: true
     networks:

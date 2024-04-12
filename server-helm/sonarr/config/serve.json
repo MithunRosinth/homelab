@@ -5,7 +5,7 @@
         }
     },
     "Web": {
-        "sonarr.platypus-manta.ts.net:443": {
+        "${TS_CERT_DOMAIN}:443": {
            "Handlers": {
             "/": {
                 "Proxy": "http://127.0.0.1:8989"
@@ -14,7 +14,7 @@
         }
     },
     "AllowFunnel": {
-        "sonarr.platypus-manta.ts.net:443" : false
+        "${TS_CERT_DOMAIN}:443" : false
     }
 
 }
