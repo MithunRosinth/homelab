@@ -8,7 +8,7 @@ services:
       - TS_AUTHKEY=value
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_SERVE_CONFIG=/config/serve.json
-      - TS_EXTRA_ARGS=--advertise-tags=tag:media-services
+      - TS_EXTRA_ARGS=--advertise-tags=tag:home-user-services
       - TZ=Asia/Dubai
     volumes:
       - ${PWD}/state:/var/lib/tailscale
