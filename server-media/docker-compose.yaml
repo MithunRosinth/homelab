@@ -1,5 +1,4 @@
 services:
-
   jellyfin-ts:
     image: tailscale/tailscale:latest
     container_name: jellyfin-ts
@@ -14,11 +13,14 @@ services:
       - ${PWD}/state:/var/lib/tailscale
       - ${PWD}/config:/config
       - /dev/net/tun:/dev/net/tun
+    ports:
+      - 8096:8096
+      - 8920:8920 #optional
+      - 7359:7359/udp #optional
+      - 1900:1900/udp #optional
     cap_add:
       - net_admin
       - sys_module
-
-###### JELLYFIN ######
 
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
@@ -27,9 +29,10 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Asia/Dubai
+      - JELLYFIN_PublishedServerUrl=https://jellyfin.border-komodo.ts.net
     volumes:
-      - ${CONFIGS}jellyfin:/config
-      - ${DATA}/tv-shows:/data/tvshows
-      - ${DATA}/movies:/data/movies
-    network_mode: service:jellyfin-ts
+      - ${CONFIG}jellyfin:/config
+      - ${DATA_TV}:/data/tvshows
+      - ${DATA_MOVIES}:/data/movies
+    network_mode: service: jellyfin-ts
     restart: unless-stopped
