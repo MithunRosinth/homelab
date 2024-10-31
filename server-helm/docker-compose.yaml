@@ -1,6 +1,5 @@
 services:
-  
-###### RADARR ######
+  ###### RADARR ######
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -17,8 +16,7 @@ services:
       - 7878:7878
     restart: unless-stopped
 
-
-###### PROWLARR ######
+  ###### PROWLARR ######
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
@@ -33,8 +31,7 @@ services:
       - 9696:9696
     restart: unless-stopped
 
-
-###### SONARR ######
+  ###### SONARR ######
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -51,40 +48,39 @@ services:
       - 8989:8989
     restart: unless-stopped
 
-
-###### QBITTORRENT ######
-
-  qbittorrent:
-      image: lscr.io/linuxserver/qbittorrent:latest
-      container_name: qbittorrent
-      environment:
-        - PUID=1000
-        - PGID=1000
-        - TZ=Asia/Dubai
-        - WEBUI_PORT=8080
-        - TORRENTING_PORT=6881
-      volumes:
-        - ${CONFIGS}qbittorrent:/config
-        - ${DOWNLOADS}:/downloads
-      ports:
-        - 8080:8080
-        - 6881:6881
-        - 6881:6881/udp
-      restart: unless-stopped
-
-##### Readarr ######
+  ##### Readarr ######
 
   readarr:
-      image: lscr.io/linuxserver/readarr:develop
-      container_name: readarr
-      environment:
-        - PUID=1000
-        - PGID=1000
-        - TZ=Asia/Dubai
-      volumes:
-        - ${CONFIGS}:/config
-        - ${DATA_BOOKS}:/books #optional
-        - ${DOWNLOADS}:/downloads #optional
-      ports:
-        - 8787:8787
-      restart: unless-stopped
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Dubai
+    volumes:
+      - ${CONFIGS}:/config
+      - ${DATA_BOOKS}:/books #optional
+      - ${DOWNLOADS}:/downloads #optional
+    ports:
+      - 8787:8787
+    restart: unless-stopped
+
+  ###### QBITTORRENT ######
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Dubai
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+    volumes:
+      - ${CONFIGS}qbittorrent:/config
+      - ${DOWNLOADS}:/downloads
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
