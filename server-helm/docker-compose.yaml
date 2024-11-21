@@ -58,7 +58,7 @@ services:
       - PGID=1000
       - TZ=Asia/Dubai
     volumes:
-      - ${CONFIGS}:/config
+      - ${CONFIGS}/readarr:/config
       - ${DATA_BOOKS}:/books #optional
       - ${DOWNLOADS}:/downloads #optional
     ports:
