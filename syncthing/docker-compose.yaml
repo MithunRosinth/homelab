@@ -7,7 +7,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Etc/UTC
+      - TZ=Asia/Dubai
     volumes:
       - /home/home_admin/configs/syncthing:/config
       - /mnt/storage/syncthing:/data1
