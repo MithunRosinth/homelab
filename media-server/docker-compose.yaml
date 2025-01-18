@@ -31,5 +31,7 @@ services:
       - ${CONFIGS}jellyfin:/config
       - ${DATA_TV}:/data/tvshows
       - ${DATA_MOVIES}:/data/movies
+    depends_on:
+      - jellyfin-ts
     network_mode: service:jellyfin-ts
     restart: unless-stopped
