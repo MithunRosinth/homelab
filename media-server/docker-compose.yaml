@@ -5,7 +5,7 @@ services:
     container_name: jellyfin-ts
     hostname: mr-jellyflix
     environment:
-      - TS_AUTHKEY=value
+    #  - TS_AUTHKEY=value
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_SERVE_CONFIG=/config/serve.json
       - TS_EXTRA_ARGS=--advertise-tags=tag:home-services
