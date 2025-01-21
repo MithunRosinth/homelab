@@ -29,6 +29,8 @@ services:
       - ${CONFIGS}jellyfin:/config
       - ${DATA_TV}:/data/tvshows
       - ${DATA_MOVIES}:/data/movies
+    devices:
+      - /dev/dri:/dev/dri
     depends_on:
       - jellyfin-ts
     network_mode: service:jellyfin-ts
