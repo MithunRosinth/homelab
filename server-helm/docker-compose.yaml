@@ -12,9 +12,6 @@ services:
       - 8888:8888/tcp # HTTP proxy
       - 8388:8388/tcp # Shadowsocks
       - 8388:8388/udp # Shadowsocks
-      - 7878:7878
-      - 8989:8989
-      - 9696:9696
       - 8080:8080
       - 6881:6881
       - 6881:6881/udp
@@ -28,8 +25,7 @@ services:
       - OPENVPN_USER=
       - OPENVPN_PASSWORD=
       - TZ=Asia/Dubai
-      - SERVER_TYPE=P2P
-      - SERVER_REGION=Europe
+      - SERVER_REGIONS=Europe
       # Server list updater
       # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
   
@@ -46,7 +42,8 @@ services:
       - ${CONFIGS}radarr:/config
       - ${DATA_MOVIES}:/movies
       - ${DOWNLOADS}:/downloads
-    network_mode: "service:gluetun"
+    ports:
+      - 7878:7878
     restart: unless-stopped
 
   ###### PROWLARR ######
@@ -60,7 +57,8 @@ services:
       - TZ=Asia/Dubai
     volumes:
       - ${CONFIGS}prowlarr:/config
-    network_mode: "service:gluetun"
+    ports:
+      - 9696:9696
     restart: unless-stopped
 
   ###### SONARR ######
@@ -76,7 +74,8 @@ services:
       - ${CONFIGS}sonarr:/config
       - ${DATA_TV}:/tv
       - ${DOWNLOADS}:/downloads
-    network_mode: "service:gluetun"
+    ports:
+      - 8989:8989
     restart: unless-stopped
 
   ###### QBITTORRENT ######
