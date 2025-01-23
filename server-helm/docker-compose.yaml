@@ -28,6 +28,8 @@ services:
       - OPENVPN_USER=
       - OPENVPN_PASSWORD=
       - TZ=Asia/Dubai
+      - SERVER_TYPE=P2P
+      - SERVER_COUNTRIES=UAE
       # Server list updater
       # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
   
