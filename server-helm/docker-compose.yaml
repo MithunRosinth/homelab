@@ -1,4 +1,37 @@
 services:
+  gluetun:
+    image: qmcgaw/gluetun
+    # container_name: gluetun
+    # line above must be uncommented to allow external containers to connect.
+    # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/connect-a-container-to-gluetun.md#external-container-to-gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      - 8888:8888/tcp # HTTP proxy
+      - 8388:8388/tcp # Shadowsocks
+      - 8388:8388/udp # Shadowsocks
+      - 7878:7878
+      - 8989:8989
+      - 9696:9696
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    volumes:
+      - /yourpath:/gluetun
+    environment:
+      # See https://github.com/qdm12/gluetun-wiki/tree/main/setup#setup
+      - VPN_SERVICE_PROVIDER=nordvpn
+      - VPN_TYPE=openvpn
+      # OpenVPN:
+      - OPENVPN_USER=
+      - OPENVPN_PASSWORD=
+      - TZ=Asia/Dubai
+      # Server list updater
+      # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
+      - SERVER_COUNTRIES=
+  
   ###### RADARR ######
 
   radarr:
@@ -12,8 +45,7 @@ services:
       - ${CONFIGS}radarr:/config
       - ${DATA_MOVIES}:/movies
       - ${DOWNLOADS}:/downloads
-    ports:
-      - 7878:7878
+    network_mode: service:gluetun
     restart: unless-stopped
 
   ###### PROWLARR ######
@@ -27,8 +59,7 @@ services:
       - TZ=Asia/Dubai
     volumes:
       - ${CONFIGS}prowlarr:/config
-    ports:
-      - 9696:9696
+    network_mode: service:gluetun
     restart: unless-stopped
 
   ###### SONARR ######
@@ -44,8 +75,7 @@ services:
       - ${CONFIGS}sonarr:/config
       - ${DATA_TV}:/tv
       - ${DOWNLOADS}:/downloads
-    ports:
-      - 8989:8989
+    network_mode: service:gluetun
     restart: unless-stopped
 
   ###### QBITTORRENT ######
@@ -62,8 +92,5 @@ services:
     volumes:
       - ${CONFIGS}qbittorrent:/config
       - ${DOWNLOADS}:/downloads
-    ports:
-      - 8080:8080
-      - 6881:6881
-      - 6881:6881/udp
+    network_mode: service:gluetun
     restart: unless-stopped
