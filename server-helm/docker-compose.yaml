@@ -44,7 +44,7 @@ services:
       - ${CONFIGS}radarr:/config
       - ${DATA_MOVIES}:/movies
       - ${DOWNLOADS}:/downloads
-    network_mode: service:gluetun
+    network_mode: "service:gluetun"
     restart: unless-stopped
 
   ###### PROWLARR ######
@@ -58,7 +58,7 @@ services:
       - TZ=Asia/Dubai
     volumes:
       - ${CONFIGS}prowlarr:/config
-    network_mode: service:gluetun
+    network_mode: "service:gluetun"
     restart: unless-stopped
 
   ###### SONARR ######
@@ -74,7 +74,7 @@ services:
       - ${CONFIGS}sonarr:/config
       - ${DATA_TV}:/tv
       - ${DOWNLOADS}:/downloads
-    network_mode: service:gluetun
+    network_mode: "service:gluetun"
     restart: unless-stopped
 
   ###### QBITTORRENT ######
@@ -91,5 +91,5 @@ services:
     volumes:
       - ${CONFIGS}qbittorrent:/config
       - ${DOWNLOADS}:/downloads
-    network_mode: service:gluetun
+    network_mode: "service:gluetun"
     restart: unless-stopped
