@@ -30,7 +30,6 @@ services:
       - TZ=Asia/Dubai
       # Server list updater
       # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
-      - SERVER_COUNTRIES=
   
   ###### RADARR ######
 
