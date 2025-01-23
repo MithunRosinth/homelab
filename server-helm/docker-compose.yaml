@@ -19,7 +19,7 @@ services:
       - 6881:6881
       - 6881:6881/udp
     volumes:
-      - /yourpath:/gluetun
+      - ${CONFIGS}gluetun:/gluetun
     environment:
       # See https://github.com/qdm12/gluetun-wiki/tree/main/setup#setup
       - VPN_SERVICE_PROVIDER=nordvpn
