@@ -17,8 +17,6 @@ services:
     cap_add:
       - net_admin
       - sys_module
-    ports:
-      - '3000:3000'
 
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
@@ -37,7 +35,7 @@ services:
       - jellyfin-ts
     network_mode: service:jellyfin-ts
     expose:
-      - '8096'
+      - 8096
     restart: unless-stopped
 
 
@@ -50,3 +48,7 @@ services:
       - NODE_ENV=development
     restart: unless-stopped
     network_mode: service:jellyfin-ts
+    depends_on:
+      - jellyfin
+    expose:
+      - 3000
