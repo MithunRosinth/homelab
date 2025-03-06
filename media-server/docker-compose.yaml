@@ -47,6 +47,9 @@ services:
       - .env
     environment:
       - NODE_ENV=development
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Dubai
     restart: unless-stopped
     network_mode: service:jellyfin-ts
     depends_on:
