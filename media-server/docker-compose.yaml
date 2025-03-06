@@ -35,3 +35,13 @@ services:
       - jellyfin-ts
     network_mode: service:jellyfin-ts
     restart: unless-stopped
+
+  streamyfin:
+    image: fredrikburmester/streamyfin-optimized-versions-server:master
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
