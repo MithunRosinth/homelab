@@ -17,9 +17,6 @@ services:
     cap_add:
       - net_admin
       - sys_module
-    expose:
-      - 8096
-      - 3000
 
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
@@ -38,19 +35,3 @@ services:
       - jellyfin-ts
     network_mode: service:jellyfin-ts
     restart: unless-stopped
-
-
-  streamyfin:
-    container_name: streamyfin-companion
-    image: fredrikburmester/streamyfin-optimized-versions-server:master
-    env_file:
-      - .env
-    environment:
-      - NODE_ENV=development
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Dubai
-    restart: unless-stopped
-    network_mode: service:jellyfin-ts
-    depends_on:
-      - jellyfin
