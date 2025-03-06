@@ -17,6 +17,8 @@ services:
     cap_add:
       - net_admin
       - sys_module
+    ports:
+      - '3000:3000'
 
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
@@ -37,11 +39,11 @@ services:
     restart: unless-stopped
 
   streamyfin:
+    container_name: streamyfin-companion
     image: fredrikburmester/streamyfin-optimized-versions-server:master
-    ports:
-      - '3000:3000'
     env_file:
       - .env
     environment:
       - NODE_ENV=development
     restart: unless-stopped
+    network_mode: service:jellyfin-ts
