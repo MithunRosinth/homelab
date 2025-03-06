@@ -36,7 +36,10 @@ services:
     depends_on:
       - jellyfin-ts
     network_mode: service:jellyfin-ts
+    expose:
+      - '8096'
     restart: unless-stopped
+
 
   streamyfin:
     container_name: streamyfin-companion
