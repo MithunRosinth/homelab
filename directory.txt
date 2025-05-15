@@ -1,0 +1,14 @@
+/mnt
+├── immich
+│   ├── library
+│   ├── lost+found
+│   └── postgres
+├── media-library
+│   ├── downloads
+│   ├── movies
+│   └── tv-shows
+├── storage
+│   ├── backups
+│   ├── drive
+│   └── lost+found
+└── usb
