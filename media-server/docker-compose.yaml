@@ -17,6 +17,7 @@ services:
     ports:
       - 1900:1900/udp
       - 7359:7359/udp
+      - 8096:8096
     cap_add:
       - net_admin
       - sys_module
