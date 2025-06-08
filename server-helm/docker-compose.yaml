@@ -1,5 +1,5 @@
 services:
-  jellyfin-ts:
+  helm-ts:
     image: tailscale/tailscale:latest
     container_name: helm-ts
     hostname: helmarr
@@ -30,7 +30,6 @@ services:
       - 8888:8888/tcp # HTTP proxy
       - 8388:8388/tcp # Shadowsocks
       - 8388:8388/udp # Shadowsocks
-      - 8080:8080
       - 6881:6881
       - 6881:6881/udp
     volumes:
