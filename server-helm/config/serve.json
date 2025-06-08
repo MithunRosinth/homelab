@@ -1,24 +1,45 @@
 {
     "TCP": {
-        "443": {
+        "8989": {
+            "HTTPS": true
+        },
+        "7878": {
+            "HTTPS": true
+        },
+        "9696": {
+            "HTTPS": true
+        },
+        "8080": {
             "HTTPS": true
         }
     },
     "Web": {
-        "${TS_CERT_DOMAIN}:443": {
+        "${TS_CERT_DOMAIN}:8989": {
            "Handlers": {
-            "/sonarr": {
-                "Proxy": "http://127.0.0.1:8989"
-            },
-            "/radarr": {
-                "Proxy": "http://127.0.0.1:7878"
-            },
-            "/prowlarr": {
-                "Proxy": "http://127.0.0.1:9696"
-            },
-            "/torrent": {
-                "Proxy": "http://127.0.0.1:8080"
-            }
+                "/": {
+                    "Proxy": "http://sonarr:8989"
+                }
+           }
+        },
+        "${TS_CERT_DOMAIN}:7878": {
+           "Handlers": {
+                "/": {
+                    "Proxy": "http://radarr:7878"
+                }
+           }
+        },
+        "${TS_CERT_DOMAIN}:9696": {
+           "Handlers": {
+                "/": {
+                    "Proxy": "http://prowlarr:9696"
+                }
+           }
+        },
+        "${TS_CERT_DOMAIN}:8080": {
+           "Handlers": {
+                "/": {
+                    "Proxy": "http://gluetun:8080"
+                }
            }
         }
     },
