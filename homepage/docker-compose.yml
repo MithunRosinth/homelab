@@ -30,4 +30,7 @@ services:
     network_mode: service:homepage-ts
     volumes:
       - ${CONFIGS}homepage:/app/config
+      - /mnt/media-library:/media-library
+      - /mnt/immich:/immich
+      - /mnt/storage:/storage
     restart: unless-stopped
