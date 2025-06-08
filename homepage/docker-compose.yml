@@ -24,7 +24,7 @@ services:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
     environment:
-      HOMEPAGE_ALLOWED_HOSTS: 192.168.0.145:3000,homepage.pegasus-acrux.ts.net
+      HOMEPAGE_ALLOWED_HOSTS: homepage.pegasus-acrux.ts.net
       PUID: 1000
       PGID: 1000
       TZ: Asia/Dubai
