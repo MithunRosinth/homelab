@@ -10,4 +10,7 @@ cd /home/home_admin/homelab/media-server &&
 docker compose down &&
 
 cd /home/home_admin/homelab/homepage &&
+docker compose down &&
+
+cd /home/home_admin/homelab/search &&
 docker compose down

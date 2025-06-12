@@ -14,4 +14,8 @@ docker compose up -d &&
 
 cd /home/home_admin/homelab/homepage &&
 docker compose down &&
-docker compose up -d 
+docker compose up -d &&
+
+cd /home/home_admin/homelab/search &&
+docker compose down &&
+docker compose up -d
