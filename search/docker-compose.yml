@@ -2,7 +2,7 @@ services:
   search-ts:
     image: tailscale/tailscale:latest
     container_name: search-ts
-    hostname: homepage
+    hostname: search
     environment:
       #  - TS_AUTHKEY=value
       - TS_STATE_DIR=/var/lib/tailscale
